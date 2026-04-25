@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TOR Dashboard</title>
+    <style>
+        body { background:#020617; color:white; font-family:Arial; }
+        input, select, button { padding:8px; margin:5px; }
+        table { width:100%; margin-top:20px; border-collapse:collapse; }
+        th, td { padding:10px; border:1px solid #444; text-align:center; }
+        th { background:#2563EB; }
+        button { background:#2563EB; color:white; border:none; }
+        a { color:#22c55e; text-decoration:none; }
+    </style>
+</head>
+<body>
+
+<h2>TOR IT SUPPORT DASHBOARD</h2>
+
+<form action="/add" method="post">
+    <input name="name" placeholder="Name" required>
+    <input name="dept" placeholder="Department">
+    <input name="issue" placeholder="Issue" required>
+
+    <select name="priority">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+    </select>
+
+    <button type="submit">Create Ticket</button>
+</form>
+
+<a href="/logout">Logout</a>
+
+<table>
+<tr>
+<th>ID</th><th>Name</th><th>Dept</th><th>Issue</th>
+<th>Priority</th><th>Status</th><th>Date</th><th>Actions</th>
+</tr>
+
+{% for t in tickets %}
+<tr>
+<td>{{t[0]}}</td>
+<td>{{t[1]}}</td>
+<td>{{t[2]}}</td>
+<td>{{t[3]}}</td>
+<td>{{t[4]}}</td>
+<td>{{t[5]}}</td>
+<td>{{t[6]}}</td>
+<td>
+<a href="/close/{{t[0]}}">Close</a> |
+<a href="/delete/{{t[0]}}">Delete</a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
