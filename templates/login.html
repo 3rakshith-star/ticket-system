@@ -1,184 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #020617; /* Dark navy */
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+        .login-card {
+            background: #0A1F44; /* Navy blue */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 300px;
+            text-align: center;
+        }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        h2 {
+            margin-bottom: 25px;
+            color: #FFFFFF;
+        }
 
-    /* Background with overlay */
-    background: linear-gradient(rgba(2,6,23,0.85), rgba(2,6,23,0.95)),
-                url('your-image.jpg') no-repeat center/cover;
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background: #1F2937; /* Grey */
+            color: white;
+        }
 
-    color: white;
-}
+        input::placeholder {
+            color: #9CA3AF;
+        }
 
-/* Glass container */
-.login-box {
-    width: 320px;
-    padding: 35px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.07);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 6px;
+            background: #2563EB; /* Accent blue */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-    animation: fadeIn 1s ease;
-}
-
-/* Logo */
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #60a5fa;
-    text-shadow: 0 0 10px #3b82f6;
-}
-
-/* Heading */
-h2 {
-    margin-bottom: 20px;
-}
-
-/* Inputs */
-.input-group {
-    position: relative;
-    margin-bottom: 18px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    background: rgba(255,255,255,0.1);
-    color: white;
-}
-
-.input-group input::placeholder {
-    color: #cbd5f5;
-}
-
-/* Neon glow on focus */
-.input-group input:focus {
-    box-shadow: 0 0 10px #3b82f6;
-}
-
-/* Options row */
-.options {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-.options a {
-    color: #93c5fd;
-    text-decoration: none;
-}
-
-.options a:hover {
-    text-decoration: underline;
-}
-
-/* Button */
-button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background: #1e3a8a;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #3b82f6;
-    box-shadow: 0 0 15px #3b82f6;
-}
-
-/* Footer */
-.footer {
-    margin-top: 15px;
-    font-size: 13px;
-}
-
-.footer a {
-    color: #60a5fa;
-    text-decoration: none;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Mobile optimization */
-@media (max-width: 400px) {
-    .login-box {
-        width: 90%;
-        padding: 25px;
-    }
-}
-</style>
-
+        button:hover {
+            background: #1D4ED8;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="login-box">
-
-    <div class="logo">⚡ MyBrand</div>
-
+<div class="login-card">
     <h2>Login</h2>
 
     <form method="post">
-
-        <div class="input-group">
-            <input type="text" name="username" placeholder="Username">
-        </div>
-
-        <div class="input-group">
-            <input type="password" name="password" placeholder="Password">
-        </div>
-
-        <div class="options">
-            <label>
-                <input type="checkbox"> Remember me
-            </label>
-            <a href="#">Forgot?</a>
-        </div>
-
+        <input type="password" name="password" placeholder="Enter Password" required>
         <button type="submit">Login</button>
-
     </form>
-
-    <div class="footer">
-        Don't have an account? <a href="#">Sign up</a>
-    </div>
-
 </div>
 
 </body>
