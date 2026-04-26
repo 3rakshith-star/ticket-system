@@ -7,20 +7,23 @@
         body {
             margin: 0;
             font-family: Arial;
-            background: #020617;
+            background: linear-gradient(135deg, #020617, #0f172a);
             color: white;
             display: flex;
         }
 
+        /* SIDEBAR GLASS */
         .sidebar {
             width: 220px;
-            background: #0f172a;
             padding: 20px;
             height: 100vh;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* LOGO SECTION */
+        /* LOGO */
         .logo-container {
             text-align: center;
             margin-bottom: 30px;
@@ -28,21 +31,20 @@
 
         .logo {
             width: 90px;
-            filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+            filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.7));
             transition: 0.3s;
         }
 
         .logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 12px rgba(37, 99, 235, 1));
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 18px rgba(37, 99, 235, 1));
         }
 
         .brand {
             margin-top: 10px;
             font-size: 18px;
             font-weight: bold;
-            color: #2563eb;
-            letter-spacing: 1px;
+            color: #60a5fa;
         }
 
         .sidebar a {
@@ -50,36 +52,73 @@
             color: #94a3b8;
             padding: 10px;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
 
         .sidebar a:hover {
-            background: #1e293b;
+            background: rgba(255,255,255,0.08);
             color: white;
         }
 
+        /* MAIN */
         .main {
             flex: 1;
             padding: 20px;
         }
 
+        /* GLASS CARDS */
         .cards {
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .card {
-            background: #0f172a;
-            padding: 20px;
             flex: 1;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
         }
 
+        /* FORM */
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background: rgba(37, 99, 235, 0.8);
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            background: rgba(37, 99, 235, 1);
+        }
+
+        /* TABLE GLASS */
         table {
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
+
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         th, td {
@@ -88,44 +127,26 @@
         }
 
         th {
-            background: #2563eb;
+            background: rgba(37, 99, 235, 0.7);
         }
 
         tr:hover {
-            background: #1e293b;
+            background: rgba(255,255,255,0.05);
         }
 
-        input, select {
-            padding: 8px;
-            margin: 5px;
-            background: #0f172a;
-            color: white;
-            border: 1px solid #1e293b;
-        }
-
-        button {
-            padding: 8px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
+        /* BADGES */
         .badge {
             padding: 5px 10px;
             border-radius: 20px;
         }
 
-        .high { background: red; }
-        .medium { background: orange; }
-        .low { background: green; }
+        .high { background: rgba(255, 0, 0, 0.7); }
+        .medium { background: rgba(255, 165, 0, 0.7); }
+        .low { background: rgba(0, 255, 0, 0.6); }
 
-        .open { background: #2563eb; }
-        .closed { background: gray; }
+        .open { background: rgba(37, 99, 235, 0.8); }
+        .closed { background: rgba(100,100,100,0.6); }
+
     </style>
 </head>
 
