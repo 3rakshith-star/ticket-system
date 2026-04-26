@@ -13,10 +13,36 @@
         }
 
         .sidebar {
-            width: 200px;
+            width: 220px;
             background: #0f172a;
             padding: 20px;
             height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* LOGO SECTION */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 90px;
+            filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 12px rgba(37, 99, 235, 1));
+        }
+
+        .brand {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2563eb;
+            letter-spacing: 1px;
         }
 
         .sidebar a {
@@ -24,6 +50,7 @@
             color: #94a3b8;
             padding: 10px;
             text-decoration: none;
+            border-radius: 6px;
         }
 
         .sidebar a:hover {
@@ -46,6 +73,7 @@
             padding: 20px;
             flex: 1;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
         table {
@@ -70,6 +98,9 @@
         input, select {
             padding: 8px;
             margin: 5px;
+            background: #0f172a;
+            color: white;
+            border: 1px solid #1e293b;
         }
 
         button {
@@ -77,6 +108,11 @@
             background: #2563eb;
             color: white;
             border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
         }
 
         .badge {
@@ -88,7 +124,7 @@
         .medium { background: orange; }
         .low { background: green; }
 
-        .open { background: blue; }
+        .open { background: #2563eb; }
         .closed { background: gray; }
     </style>
 </head>
@@ -96,7 +132,14 @@
 <body>
 
 <div class="sidebar">
-    <h3>TSI</h3>
+
+    <div class="logo-container">
+        <a href="/">
+            <img src="/static/logo.png" class="logo">
+        </a>
+        <div class="brand">TSI</div>
+    </div>
+
     <a href="#">Dashboard</a>
     <a href="/logout">Logout</a>
 </div>
