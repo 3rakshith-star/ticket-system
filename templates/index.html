@@ -1,60 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TSI Dashboard</title>
+    <title>Dashboard</title>
+
     <style>
-        body { background:#020617; color:white; font-family:Arial; }
-        input, select, button { padding:8px; margin:5px; }
-        table { width:100%; margin-top:20px; border-collapse:collapse; }
-        th, td { padding:10px; border:1px solid #444; text-align:center; }
-        th { background:#2563EB; }
-        button { background:#2563EB; color:white; border:none; }
-        a { color:#22c55e; text-decoration:none; }
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #020617;
+            color: white;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #0f172a;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #94a3b8;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background: #1e293b;
+            color: white;
+        }
+
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card {
+            background: #0f172a;
+            padding: 20px;
+            flex: 1;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #2563eb;
+        }
+
+        tr:hover {
+            background: #1e293b;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px;
+            background: #2563eb;
+            color: white;
+            border: none;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .high { background: red; }
+        .medium { background: orange; }
+        .low { background: green; }
+
+        .open { background: blue; }
+        .closed { background: gray; }
     </style>
 </head>
+
 <body>
 
-<h2>TSI IT SUPPORT DASHBOARD</h2>
+<div class="sidebar">
+    <h3>TSI</h3>
+    <a href="#">Dashboard</a>
+    <a href="/logout">Logout</a>
+</div>
 
-<form action="/add" method="post">
-    <input name="name" placeholder="Name" required>
-    <input name="dept" placeholder="Department">
-    <input name="issue" placeholder="Issue" required>
+<div class="main">
 
-    <select name="priority">
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-    </select>
+    <h2>Dashboard</h2>
 
-    <button type="submit">Create Ticket</button>
-</form>
+    <div class="cards">
+        <div class="card">Total: {{ total }}</div>
+        <div class="card">Open: {{ open_count }}</div>
+        <div class="card">High: {{ high_count }}</div>
+        <div class="card">Closed: {{ closed_count }}</div>
+    </div>
 
-<a href="/logout">Logout</a>
+    <!-- FILTER -->
+    <form method="get">
+        <input name="search" placeholder="Search">
+        <select name="priority">
+            <option value="">Priority</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+        <select name="status">
+            <option value="">Status</option>
+            <option>Open</option>
+            <option>Closed</option>
+        </select>
+        <button>Filter</button>
+    </form>
 
-<table>
-<tr>
-<th>ID</th><th>Name</th><th>Dept</th><th>Issue</th>
-<th>Priority</th><th>Status</th><th>Date</th><th>Actions</th>
-</tr>
+    <!-- ADD -->
+    <form action="/add" method="post">
+        <input name="name" placeholder="Name" required>
+        <input name="dept" placeholder="Dept">
+        <input name="issue" placeholder="Issue" required>
 
-{% for t in tickets %}
-<tr>
-<td>{{t[0]}}</td>
-<td>{{t[1]}}</td>
-<td>{{t[2]}}</td>
-<td>{{t[3]}}</td>
-<td>{{t[4]}}</td>
-<td>{{t[5]}}</td>
-<td>{{t[6]}}</td>
-<td>
-<a href="/close/{{t[0]}}">Close</a> |
-<a href="/delete/{{t[0]}}">Delete</a>
-</td>
-</tr>
-{% endfor %}
+        <select name="priority">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
 
-</table>
+        <button>Add</button>
+    </form>
+
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Dept</th><th>Issue</th>
+            <th>Priority</th><th>Status</th><th>Date</th><th>Action</th>
+        </tr>
+
+        {% for t in tickets %}
+        <tr>
+            <td>{{t.id}}</td>
+            <td>{{t.name}}</td>
+            <td>{{t.department}}</td>
+            <td>{{t.issue}}</td>
+
+            <td>
+                <span class="badge {{t.priority|lower}}">
+                    {{t.priority}}
+                </span>
+            </td>
+
+            <td>
+                <span class="badge {{t.status|lower}}">
+                    {{t.status}}
+                </span>
+            </td>
+
+            <td>{{t.date}}</td>
+
+            <td>
+                <a href="/close/{{t.id}}">Close</a> |
+                <a href="/delete/{{t.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
 
 </body>
 </html>

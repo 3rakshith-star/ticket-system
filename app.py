@@ -9,6 +9,7 @@ app.secret_key = "supersecretkey"
 # ---------------------- DATABASE ----------------------
 def get_db():
     conn = sqlite3.connect("tickets.db")
+    conn.row_factory = sqlite3.Row
     return conn
 
 def init_db():
@@ -44,7 +45,7 @@ def logout():
     session.clear()
     return redirect("/login")
 
-# ---------------------- HOME ----------------------
+# ---------------------- DASHBOARD ----------------------
 @app.route("/")
 def index():
     if "user" not in session:
@@ -52,11 +53,53 @@ def index():
 
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM tickets")
+
+    # Filters
+    priority = request.args.get("priority")
+    status = request.args.get("status")
+    search = request.args.get("search")
+
+    query = "SELECT * FROM tickets WHERE 1=1"
+    params = []
+
+    if priority:
+        query += " AND priority=?"
+        params.append(priority)
+
+    if status:
+        query += " AND status=?"
+        params.append(status)
+
+    if search:
+        query += " AND issue LIKE ?"
+        params.append(f"%{search}%")
+
+    cursor.execute(query, params)
     tickets = cursor.fetchall()
+
+    # Stats
+    cursor.execute("SELECT COUNT(*) FROM tickets")
+    total = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM tickets WHERE status='Open'")
+    open_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM tickets WHERE priority='High'")
+    high_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM tickets WHERE status='Closed'")
+    closed_count = cursor.fetchone()[0]
+
     conn.close()
 
-    return render_template("index.html", tickets=tickets)
+    return render_template(
+        "index.html",
+        tickets=tickets,
+        total=total,
+        open_count=open_count,
+        high_count=high_count,
+        closed_count=closed_count
+    )
 
 # ---------------------- ADD ----------------------
 @app.route("/add", methods=["POST"])
@@ -73,8 +116,11 @@ def add_ticket():
 
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO tickets VALUES (NULL,?,?,?,?,?,?)",
-                   (name, dept, issue, priority, "Open", date))
+    cursor.execute("""
+        INSERT INTO tickets (name, department, issue, priority, status, date)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (name, dept, issue, priority, "Open", date))
+
     conn.commit()
     conn.close()
 
@@ -110,5 +156,4 @@ def delete_ticket(id):
 
 # ---------------------- RUN ----------------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)

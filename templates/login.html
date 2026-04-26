@@ -4,73 +4,49 @@
     <title>Login</title>
     <style>
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #020617; /* Dark navy */
-            color: #FFFFFF;
+            background: #020617;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            font-family: Arial;
         }
 
-        .login-card {
-            background: #0A1F44; /* Navy blue */
-            padding: 40px;
+        .box {
+            background: #0f172a;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            width: 300px;
             text-align: center;
         }
 
-        h2 {
-            margin-bottom: 25px;
-            color: #FFFFFF;
-        }
-
         input {
-            width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: none;
+            margin: 10px;
+            width: 200px;
             border-radius: 6px;
-            background: #1F2937; /* Grey */
-            color: white;
-        }
-
-        input::placeholder {
-            color: #9CA3AF;
+            border: none;
         }
 
         button {
-            width: 100%;
             padding: 10px;
-            margin-top: 15px;
+            width: 220px;
+            background: #2563eb;
+            color: white;
             border: none;
             border-radius: 6px;
-            background: #2563EB; /* Accent blue */
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #1D4ED8;
         }
     </style>
 </head>
 
 <body>
-
-<div class="login-card">
-    <h2>Login</h2>
-
-    <form method="post">
-        <input type="password" name="password" placeholder="Enter Password" required>
-        <button type="submit">Login</button>
-    </form>
-</div>
-
+    <div class="box">
+        <h2>Admin Login</h2>
+        <form method="post">
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
