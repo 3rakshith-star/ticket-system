@@ -1,248 +1,265 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Dashboard</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: linear-gradient(135deg, #020617, #0f172a);
-            color: white;
-            display: flex;
-        }
+```
+<style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        background: linear-gradient(135deg, #020617, #0f172a);
+        color: white;
+        display: flex;
+    }
 
-        /* SIDEBAR GLASS */
-        .sidebar {
-            width: 220px;
-            padding: 20px;
-            height: 100vh;
+    /* SIDEBAR (GLASS) */
+    .sidebar {
+        width: 220px;
+        padding: 20px;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        border-right: 1px solid rgba(255,255,255,0.1);
+    }
 
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
+    /* LOGO */
+    .logo-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        /* LOGO */
-        .logo-container {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .logo {
+        width: 90px;
+        display: block;
+        margin: 0 auto;
+        padding: 6px;
+        border-radius: 10px;
 
-        .logo {
-            width: 90px;
-            filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.7));
-            transition: 0.3s;
-        }
+        /* makes logo visible on glass */
+        background: rgba(255,255,255,0.05);
 
-        .logo:hover {
-            transform: scale(1.08);
-            filter: drop-shadow(0 0 18px rgba(37, 99, 235, 1));
-        }
+        filter: brightness(1.2) contrast(1.1)
+                drop-shadow(0 0 12px rgba(37,99,235,0.8));
+        transition: 0.3s;
+    }
 
-        .brand {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #60a5fa;
-        }
+    .logo:hover {
+        transform: scale(1.08);
+        filter: brightness(1.3)
+                drop-shadow(0 0 18px rgba(37,99,235,1));
+    }
 
-        .sidebar a {
-            display: block;
-            color: #94a3b8;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
+    .brand {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #60a5fa;
+    }
 
-        .sidebar a:hover {
-            background: rgba(255,255,255,0.08);
-            color: white;
-        }
+    .sidebar a {
+        display: block;
+        color: #94a3b8;
+        padding: 10px;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
 
-        /* MAIN */
-        .main {
-            flex: 1;
-            padding: 20px;
-        }
+    .sidebar a:hover {
+        background: rgba(255,255,255,0.08);
+        color: white;
+    }
 
-        /* GLASS CARDS */
-        .cards {
-            display: flex;
-            gap: 15px;
-        }
+    /* MAIN */
+    .main {
+        flex: 1;
+        padding: 20px;
+    }
 
-        .card {
-            flex: 1;
-            padding: 20px;
-            border-radius: 15px;
+    /* CARDS */
+    .cards {
+        display: flex;
+        gap: 15px;
+    }
 
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+    .card {
+        flex: 1;
+        padding: 20px;
+        border-radius: 15px;
 
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-        }
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
 
-        /* FORM */
-        input, select {
-            padding: 8px;
-            margin: 5px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 6px;
-        }
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
 
-        button {
-            padding: 8px 12px;
-            background: rgba(37, 99, 235, 0.8);
-            border: none;
-            color: white;
-            border-radius: 6px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
+    /* FORM */
+    input, select {
+        padding: 8px;
+        margin: 5px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: white;
+        border-radius: 6px;
+    }
 
-        button:hover {
-            background: rgba(37, 99, 235, 1);
-        }
+    button {
+        padding: 8px 12px;
+        background: rgba(37, 99, 235, 0.8);
+        border: none;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 
-        /* TABLE GLASS */
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
+    button:hover {
+        background: rgba(37, 99, 235, 1);
+    }
 
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            overflow: hidden;
-        }
+    /* TABLE */
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
+        background: rgba(255,255,255,0.03);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-        th {
-            background: rgba(37, 99, 235, 0.7);
-        }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
 
-        tr:hover {
-            background: rgba(255,255,255,0.05);
-        }
+    th {
+        background: rgba(37, 99, 235, 0.7);
+    }
 
-        /* BADGES */
-        .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
+    tr:hover {
+        background: rgba(255,255,255,0.05);
+    }
 
-        .high { background: rgba(255, 0, 0, 0.7); }
-        .medium { background: rgba(255, 165, 0, 0.7); }
-        .low { background: rgba(0, 255, 0, 0.6); }
+    /* BADGES */
+    .badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
 
-        .open { background: rgba(37, 99, 235, 0.8); }
-        .closed { background: rgba(100,100,100,0.6); }
+    .high { background: rgba(255, 0, 0, 0.7); }
+    .medium { background: rgba(255, 165, 0, 0.7); }
+    .low { background: rgba(0, 255, 0, 0.6); }
 
-    </style>
+    .open { background: rgba(37, 99, 235, 0.8); }
+    .closed { background: rgba(100,100,100,0.6); }
+</style>
+```
+
 </head>
 
 <body>
 
 <div class="sidebar">
 
-    <div class="logo-container">
-        <a href="/">
-            <img src="/static/logo.png" class="logo">
-        </a>
-        <div class="brand">TSI</div>
-    </div>
+```
+<div class="logo-container">
+    <!-- ✅ CORRECT FLASK PATH -->
+    <a href="/">
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+    </a>
+    <div class="brand">TSI</div>
+</div>
 
-    <a href="#">Dashboard</a>
-    <a href="/logout">Logout</a>
+<a href="#">Dashboard</a>
+<a href="/logout">Logout</a>
+```
+
 </div>
 
 <div class="main">
 
-    <h2>Dashboard</h2>
+```
+<h2>Dashboard</h2>
 
-    <div class="cards">
-        <div class="card">Total: {{ total }}</div>
-        <div class="card">Open: {{ open_count }}</div>
-        <div class="card">High: {{ high_count }}</div>
-        <div class="card">Closed: {{ closed_count }}</div>
-    </div>
+<div class="cards">
+    <div class="card">Total: {{ total }}</div>
+    <div class="card">Open: {{ open_count }}</div>
+    <div class="card">High: {{ high_count }}</div>
+    <div class="card">Closed: {{ closed_count }}</div>
+</div>
 
-    <!-- FILTER -->
-    <form method="get">
-        <input name="search" placeholder="Search">
-        <select name="priority">
-            <option value="">Priority</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-        </select>
-        <select name="status">
-            <option value="">Status</option>
-            <option>Open</option>
-            <option>Closed</option>
-        </select>
-        <button>Filter</button>
-    </form>
+<!-- FILTER -->
+<form method="get">
+    <input name="search" placeholder="Search">
+    <select name="priority">
+        <option value="">Priority</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+    </select>
+    <select name="status">
+        <option value="">Status</option>
+        <option>Open</option>
+        <option>Closed</option>
+    </select>
+    <button>Filter</button>
+</form>
 
-    <!-- ADD -->
-    <form action="/add" method="post">
-        <input name="name" placeholder="Name" required>
-        <input name="dept" placeholder="Dept">
-        <input name="issue" placeholder="Issue" required>
+<!-- ADD -->
+<form action="/add" method="post">
+    <input name="name" placeholder="Name" required>
+    <input name="dept" placeholder="Dept">
+    <input name="issue" placeholder="Issue" required>
 
-        <select name="priority">
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-        </select>
+    <select name="priority">
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+    </select>
 
-        <button>Add</button>
-    </form>
+    <button>Add</button>
+</form>
 
-    <!-- TABLE -->
-    <table>
-        <tr>
-            <th>ID</th><th>Name</th><th>Dept</th><th>Issue</th>
-            <th>Priority</th><th>Status</th><th>Date</th><th>Action</th>
-        </tr>
+<!-- TABLE -->
+<table>
+    <tr>
+        <th>ID</th><th>Name</th><th>Dept</th><th>Issue</th>
+        <th>Priority</th><th>Status</th><th>Date</th><th>Action</th>
+    </tr>
 
-        {% for t in tickets %}
-        <tr>
-            <td>{{t.id}}</td>
-            <td>{{t.name}}</td>
-            <td>{{t.department}}</td>
-            <td>{{t.issue}}</td>
+    {% for t in tickets %}
+    <tr>
+        <td>{{t.id}}</td>
+        <td>{{t.name}}</td>
+        <td>{{t.department}}</td>
+        <td>{{t.issue}}</td>
 
-            <td>
-                <span class="badge {{t.priority|lower}}">
-                    {{t.priority}}
-                </span>
-            </td>
+        <td>
+            <span class="badge {{t.priority|lower}}">
+                {{t.priority}}
+            </span>
+        </td>
 
-            <td>
-                <span class="badge {{t.status|lower}}">
-                    {{t.status}}
-                </span>
-            </td>
+        <td>
+            <span class="badge {{t.status|lower}}">
+                {{t.status}}
+            </span>
+        </td>
 
-            <td>{{t.date}}</td>
+        <td>{{t.date}}</td>
 
-            <td>
-                <a href="/close/{{t.id}}">Close</a> |
-                <a href="/delete/{{t.id}}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+        <td>
+            <a href="/close/{{t.id}}">Close</a> |
+            <a href="/delete/{{t.id}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+```
 
 </div>
 
